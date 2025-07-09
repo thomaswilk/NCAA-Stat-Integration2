@@ -34,14 +34,14 @@ defmodule Statfitter do
     end     
 
     
-    # def match_quarter(stats) do 
+#   # def match_quarter(stats) do 
     #     {cv, pbp} = stats    
 
     #     num_cv_fo = Utils.get_faceoffs(cv_fo)
-    #     |> Utils.get_stats_length()
+    #     |> length()
 
     #     num_pbp_fo = Utils.get_faceoffs(pbp_fo)
-    #     |> Utils.get_stats_length()
+    #     |> length()
     #     # get number of face offs for each
         
     #     if num_cv_fo == num_pbp_fo do
@@ -55,18 +55,17 @@ defmodule Statfitter do
     #     else do 
 
     #     end 
-    # end
+# end
 
-    def fo_equal(cv_stats, pbp_stats) do
-        Utils.get_faceoffs(cv_stats)
-        Utils.get_faceoffs(pbp_stats)
+    # TODO: Implement matching branch 
+    # will be easy
+
+    def fo_equal(_cv_stats, _pbp_stats) do
         nil
-
-
     end
 
-    # TODO: Implement imputation branch----#
-    # FALSE DETECTIONS
+    # TODO: Implement parsing branch -----# 
+     # FALSE DETECTIONS
         # Three ways to possibly detect  false detection
 
         # 1: how long since last face off
@@ -81,17 +80,27 @@ defmodule Statfitter do
             # then we can see that one of the last two must be incorrect 
     #-----------------------------------------#
 
-    def pbp_gt_matching(_cv_stats, _pbp_stats) do 
-        nil
+    # Assumptions: . 
+
+    def pbp_lt_cv_matching(cv_stats, pbp_stats) do 
+       Statfitter.Utils.get_faceoffs(cv_stats)
+        |> Enum.map(fn stat -> 
+            stat.team
+        end)
+
+        Statfitter.Utils.get_faceoffs(pbp_stats)
+        |> Enum.map(fn stat -> 
+            stat.team
+        end)
     end
 
-    # TODO: Implement parsing branch -----# 
+    # TODO: Implement imputation branch----#
         # tbh no clue yet 
             # Use estimated realtime to predict where to impute extra faceoff?
             # [cv_stats[0] start time, cv_stats[-1] start time] is the time of the quarter?
             # 
     #-------------------------------------#
-    def pbp_lt_matching(_cv_stats, _pbp_stats) do 
+    def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
         nil
     end 
 
@@ -109,6 +118,10 @@ defmodule Statfitter do
         def get_faceoffs(stats) do
             faceoffs = Enum.filter(stats, fn stat -> stat.title == "Faceoff" end)
             faceoffs
+        end 
+
+        def get_faceoffs(stats1, stats2) do
+            {get_faceoffs(stats1), get_faceoffs(stats2)}
         end 
 
         # type checking 
@@ -151,16 +164,13 @@ defmodule Statfitter do
             [Float.round((current_fo_time - last) * 1.0, 2) | get_faceoff_difference_array_cv(rest, current_fo_time)]
         end 
     #----------------------------------------------------------------------------#
-
-        # @martin: change this to tail recursion?
-        #base case
-        def get_stats_length([]) do
-            0
-        end
-        #t counting 
-        def get_stats_length([_head | tail]) do 
-            1 + get_stats_length(tail)
-        end  
+        def get_length_of_stat(stat) do 
+            if stat.film_time_end and stat.film_time_start do
+                Float.round((stat.film_time_end - stat.film_time_start) * 1.0, 2)
+            else 
+                nil
+            end    
+        end 
 
         def update_time_continuous(stats) do
             # Turnovers cause issues due to sometimes missing time
@@ -175,52 +185,65 @@ defmodule Statfitter do
                 %Stat{stat | time: total_seconds}
             end )
         end
-
-    end 
-
+    end
 
 end
 
-defmodule Team_Assigner do 
 
+#Move this module inside of statfitter?
+defmodule Team_Assigner do 
         # This module determines which team is "left" and which team is "right" in cv stats
+        # Main function is assign_cv_teams
+        # Pass the two list of stats and then it will return cv_stats with the team name
+        # matching the team name abbreviation in the pbp stats
 
 
         # Given full list of stats
-        def assign_cv_teams(cv_stats, pbp_stats) do
-            adjusted = Statfitter.Utils.get_faceoffs(cv_stats, pbp_stats)
-            |> backwards_check
-            |> replace_team_names(cv_stats)
+       def assign_cv_teams(cv_stats, pbp_stats) do
+            {cv_faceoffs, pbp_faceoffs} = Statfitter.Utils.get_faceoffs(cv_stats, pbp_stats)
 
-            adjusted
+            {left_team, right_team} =
+            {cv_faceoffs, pbp_faceoffs}
+            |> backwards_check()
+
+            replace_team_names({left_team, right_team}, cv_stats)
+        end
+
+        # TODO: Implement a method of matching teams properly 
+
+        def backwards_check({cv_faceoffs, pbp_faceoffs}) do
+            cv_fo = cv_faceoffs |> Statfitter.Utils.get_stat_by_period(1) |> List.last()
+            pbp_fo = pbp_faceoffs |> Statfitter.Utils.get_stat_by_period(1) |> List.last()
+
+
+            # who left who right?
+            case cv_fo.team do
+                "left" -> IO.inspect({pbp_fo.team, get_other_team(pbp_fo.team, pbp_faceoffs)})
+                        {pbp_fo.team, get_other_team(pbp_fo.team, pbp_faceoffs)}
+                "right" -> IO.inspect({get_other_team(pbp_fo.team, pbp_faceoffs), pbp_fo.team})
+                        {get_other_team(pbp_fo.team, pbp_faceoffs), pbp_fo.team}
+                _ -> {"Unknown", "Unknown"}
+            end
         end
 
 
-        # TODO: Implement a method of matching teams properly 
-        # Mabye check last face off?
-        # Or find quarter which matches and then do that one
-        # Or count which team wins more 
-        def backwards_check(faceoffs) do 
-            cv_fo, pbp_fo = faceoffs 
-            cv_fo_r = Enum.reverse(cv_fo)
-            pbp_fo_r = Enum.reverse(pbp_fo)
-            nil
-            # should return {left_team_name, right_team_name}
-        end 
-
-
         # this thing replaces team names left and right from the cv stats with the actual team names
-        def replace_team_names(team_names, cv_stats) do 
-            {left, right} = team_names
-            converted_stats = 
-            Enum.map(cv_stats, fn stat -> 
-                case stat["team"] do 
-                    "right" -> Map.put(stat, "team", right)
-                    "left" -> Map.put(stat, "team", left)
+        def replace_team_names({left, right}, cv_stats) do
+            Enum.map(cv_stats, fn stat ->
+                case stat.team do
+                    "left" -> %Stat{stat | team: left}
+                    "right" -> %Stat{stat | team: right}
                     _ -> stat
-                end 
+                end
             end)
+        end
 
-            converted_stats
-        end 
-end  # end assign team
+        # 
+        defp get_other_team(team, pbp_faceoffs) do
+            Enum.find_value(pbp_faceoffs, fn stat ->
+                other = stat.team
+                if other != team, do: other, else: nil
+            end)
+        end
+
+end 
