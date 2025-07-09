@@ -1,0 +1,13 @@
+To call local server:
+{:dotenv_parser, "~> 2.0"}
+
+DotenvParser.load_file(".env")
+token = System.get_env("BEARER_TOKEN")
+
+
+headers = [
+  {"Authorization", "Bearer " <> token},
+  {"accept", "application/json"}
+]
+Requests.get_cv_breakdown(704005, headers)
+|> Utils.save_cv_json("output/firsttry2.json")

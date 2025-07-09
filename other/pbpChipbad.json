@@ -1,0 +1,1829 @@
+[
+  {
+    "time": "15:00",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "14:34",
+    "result": "OFFSIDE/0:30",
+    "stat": "Penalty",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "13:56",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Matthew Keegan"
+  },
+  {
+    "time": "13:56",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "13:47",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Gilmartin, Luke"
+  },
+  {
+    "time": "13:45",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "13:02",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "13:02",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "13:00",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "11:59",
+    "result": "blocked",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "11:56",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "11:54",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "11:54",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "11:50",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "11:32",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "11:32",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "11:29",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "11:26",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "10:38",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Waldman, Ryan (FIRST GOAL)"
+  },
+  {
+    "time": "10:38",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Waldman, Ryan (FIRST GOAL)"
+  },
+  {
+    "time": "10:38",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "09:55",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "09:55",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Eric  Kolar"
+  },
+  {
+    "time": "09:51",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Jackson Canfield"
+  },
+  {
+    "time": "09:46",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "09:09",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Elijah Stobaugh"
+  },
+  {
+    "time": "08:49",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "08:49",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "08:43",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "08:35",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "08:33",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Bozzi, Michael"
+  },
+  {
+    "time": "08:33",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "08:16",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "07:30",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "07:27",
+    "result": "blocked",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Matthew Keegan"
+  },
+  {
+    "time": "07:27",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "07:27",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "07:27",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "07:27",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "06:27",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Waldman, Ryan"
+  },
+  {
+    "time": "06:07",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Luzzi, Brian"
+  },
+  {
+    "time": "06:07",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "06:03",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "05:09",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa"
+  },
+  {
+    "time": "04:45",
+    "result": null,
+    "stat": "Shot clock violation",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "04:42",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "04:33",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "03:55",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Firth, Willem"
+  },
+  {
+    "time": "03:55",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "03:39",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "02:58",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Aidan  Aitken"
+  },
+  {
+    "time": "02:58",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "02:54",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "02:33",
+    "result": "blocked",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "02:21",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Dooley, Matt"
+  },
+  {
+    "time": "01:40",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "01:26",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "01:16",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Luzzi, Brian, Assist by Long, Michael"
+  },
+  {
+    "time": "01:16",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Luzzi, Brian, Assist by Long, Michael"
+  },
+  {
+    "time": "01:16",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "00:04",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "00:04",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "15:00",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "14:49",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Daniel Kelly, Assist by AJ  Larkin"
+  },
+  {
+    "time": "14:49",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Daniel Kelly, Assist by AJ  Larkin"
+  },
+  {
+    "time": "14:49",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "14:09",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Dalton, Andrew"
+  },
+  {
+    "time": "13:35",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "13:29",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "13:29",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "13:29",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "13:05",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "12:25",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "12:18",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "12:18",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "12:16",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "12:14",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "11:30",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Dalton, Andrew"
+  },
+  {
+    "time": "11:00",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Firth, Willem"
+  },
+  {
+    "time": "11:00",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "10:58",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Kelleher, Hugh"
+  },
+  {
+    "time": "10:58",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kelleher, Hugh"
+  },
+  {
+    "time": "10:58",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Kelleher, Hugh"
+  },
+  {
+    "time": "10:22",
+    "result": "blocked",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kelleher, Hugh"
+  },
+  {
+    "time": "10:17",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "AJ  Larkin"
+  },
+  {
+    "time": "10:15",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "AJ  Larkin"
+  },
+  {
+    "time": "10:15",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "10:00",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "09:55",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "09:18",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "08:54",
+    "result": "pipe",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "08:49",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "08:38",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "08:38",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "08:38",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "07:52",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Dalton, Andrew, Assist by Long, Michael"
+  },
+  {
+    "time": "07:52",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Dalton, Andrew, Assist by Long, Michael"
+  },
+  {
+    "time": "07:52",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "07:39",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "AJ  Larkin"
+  },
+  {
+    "time": "07:39",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "07:37",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Singer, Jayson"
+  },
+  {
+    "time": "07:35",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "06:41",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "06:38",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "06:36",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "06:08",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Elijah Stobaugh"
+  },
+  {
+    "time": "06:00",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa"
+  },
+  {
+    "time": "06:00",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "05:55",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "05:42",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "05:13",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "05:13",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "05:06",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "05:06",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "05:06",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "04:23",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa"
+  },
+  {
+    "time": "04:02",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "03:40",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "03:28",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Matthew Keegan"
+  },
+  {
+    "time": "03:15",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Matthew Keegan"
+  },
+  {
+    "time": "02:48",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "02:48",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "02:48",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "02:21",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "02:19",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "02:19",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Wallace, Walker"
+  },
+  {
+    "time": "01:49",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "01:49",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "01:49",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "01:12",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Jack Schultz, Assist by Aidan  Aitken"
+  },
+  {
+    "time": "01:12",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Jack Schultz, Assist by Aidan  Aitken"
+  },
+  {
+    "time": "01:12",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "00:18",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Firth, Willem"
+  },
+  {
+    "time": "00:18",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "00:13",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "00:00",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "00:00",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "00:00",
+    "result": "blocked",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "15:00",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "14:35",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "14:06",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "14:06",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "14:03",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Will  Schaller"
+  },
+  {
+    "time": "13:59",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "George Stamos"
+  },
+  {
+    "time": "13:57",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "13:36",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Will  Schaller"
+  },
+  {
+    "time": "13:17",
+    "result": "pipe",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "13:13",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Dooley, Matt"
+  },
+  {
+    "time": "13:08",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "12:35",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "12:35",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "12:32",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "11:20",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "11:20",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "11:12",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Dooley, Matt"
+  },
+  {
+    "time": "11:12",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Dooley, Matt"
+  },
+  {
+    "time": "11:12",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "10:42",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "10:35",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "09:56",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "09:56",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "09:56",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "09:39",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "09:12",
+    "result": "pipe",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Sheehan, Ryan"
+  },
+  {
+    "time": "08:59",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "08:35",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "08:35",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "08:30",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "08:27",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "08:27",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Waldman, Ryan"
+  },
+  {
+    "time": "08:19",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "07:45",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa"
+  },
+  {
+    "time": "07:45",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "07:41",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "07:38",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "07:18",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "07:18",
+    "result": "HOLDING/0:30",
+    "stat": "Penalty",
+    "team": "UMD",
+    "player": "Will  Schaller"
+  },
+  {
+    "time": "06:50",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "06:25",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "06:25",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "06:25",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "05:39",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "05:39",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Eric  Kolar"
+  },
+  {
+    "time": "05:24",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "04:49",
+    "result": "pipe",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Matthew Keegan"
+  },
+  {
+    "time": "04:37",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "04:18",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa, Assist by Eric Spanos"
+  },
+  {
+    "time": "04:18",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Braden Erksa, Assist by Eric Spanos"
+  },
+  {
+    "time": "04:18",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "03:57",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Jack McDonald"
+  },
+  {
+    "time": "03:41",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "Aidan  Aitken"
+  },
+  {
+    "time": "03:41",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Lamb, TJ"
+  },
+  {
+    "time": "03:34",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Lamb, TJ"
+  },
+  {
+    "time": "03:26",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "02:36",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "02:36",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "02:36",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "02:36",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "02:28",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "02:09",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "02:09",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "02:09",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "00:46",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "00:44",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "00:43",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "00:43",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "00:41",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "15:00",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "14:05",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Firth, Willem"
+  },
+  {
+    "time": "14:05",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Eric  Kolar"
+  },
+  {
+    "time": "13:59",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "13:53",
+    "result": null,
+    "stat": "Shot clock violation",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "13:42",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan, Assist by Kirst, CJ"
+  },
+  {
+    "time": "13:42",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Goldstein, Ryan, Assist by Kirst, CJ"
+  },
+  {
+    "time": "13:42",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "12:50",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa"
+  },
+  {
+    "time": "12:36",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Braden Erksa, Assist by Eric Spanos"
+  },
+  {
+    "time": "12:36",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Braden Erksa, Assist by Eric Spanos"
+  },
+  {
+    "time": "12:36",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "11:11",
+    "result": "pipe",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Sheehan, Ryan"
+  },
+  {
+    "time": "10:46",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "10:46",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "10:39",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "09:39",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "09:39",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "09:23",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Elijah Stobaugh"
+  },
+  {
+    "time": "09:23",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Elijah Stobaugh"
+  },
+  {
+    "time": "09:23",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "08:18",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Eric Spanos"
+  },
+  {
+    "time": "08:18",
+    "result": null,
+    "stat": "Save",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "08:16",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  },
+  {
+    "time": "08:11",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "07:30",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "06:42",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "06:42",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "06:42",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "06:27",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "Colin Burlace"
+  },
+  {
+    "time": "06:27",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Long, Michael"
+  },
+  {
+    "time": "06:25",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "05:12",
+    "result": "Saved",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "05:12",
+    "result": null,
+    "stat": "Save",
+    "team": "UMD",
+    "player": "Logan McNaney"
+  },
+  {
+    "time": "04:14",
+    "result": "missed",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "04:08",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "04:08",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Goldstein, Ryan"
+  },
+  {
+    "time": "04:08",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "03:35",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "03:29",
+    "result": null,
+    "stat": "Turnover",
+    "team": "UMD",
+    "player": "Daniel Kelly"
+  },
+  {
+    "time": "03:29",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Staub, Brendan"
+  },
+  {
+    "time": "03:29",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Long, Michael"
+  },
+  {
+    "time": "02:56",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "01:59",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "01:22",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "01:22",
+    "result": null,
+    "stat": "Goal",
+    "team": "UMD",
+    "player": "Zach Whittier"
+  },
+  {
+    "time": "01:22",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "00:50",
+    "result": "Goal",
+    "stat": "Shot",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "00:50",
+    "result": null,
+    "stat": "Goal",
+    "team": "COR",
+    "player": "Kirst, CJ"
+  },
+  {
+    "time": "00:50",
+    "result": null,
+    "stat": "Faceoff",
+    "team": "COR",
+    "player": null
+  },
+  {
+    "time": "00:41",
+    "result": null,
+    "stat": "Turnover",
+    "team": "COR",
+    "player": "Davis, Christopher"
+  },
+  {
+    "time": "00:41",
+    "result": null,
+    "stat": "Caused Turnover",
+    "team": null,
+    "player": "Bryce Ford"
+  },
+  {
+    "time": "00:38",
+    "result": "good",
+    "stat": "Clear attempt",
+    "team": "UMD",
+    "player": null
+  },
+  {
+    "time": "00:02",
+    "result": null,
+    "stat": "Ground ball pickup",
+    "team": "COR",
+    "player": "Knust, Wyatt"
+  }
+]

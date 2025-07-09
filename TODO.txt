@@ -1,0 +1,66 @@
+
+
+
+Parse -
+    !!!For play by play , it should return period too 
+
+Requests -
+    Some sort of endpoint to check if both play by play and cv breakdown available 
+
+
+Stat - 
+M    !Do we even need this? Why not just have it be a map? 
+
+
+Utils - 
+    Json readers / writers 
+    
+
+
+
+THEEEBRAINNNNNN - 
+    Fitter - 
+
+
+        Utils - 
+            get stats by period 
+            get faceoffs 
+
+    Assign Teams - 
+
+
+
+
+First faceoff
+
+SIENA VS MARIST 
+
+1: Left, SIE
+2: Left, SIE
+3: Left, MAR
+4: Right, Mar
+
+
+CHIP
+
+1: Right, UMD
+2: Right, UMD
+3: Left, COR
+4: Left, COR 
+
+------------------
+
+Last faceoff
+
+marist vs sienn
+cv: Left
+pbp: SIE
+
+Good 
+
+
+chip
+cv: Right
+pbp: COR
+
+Not good 
