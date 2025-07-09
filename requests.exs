@@ -1,5 +1,6 @@
 Code.require_file("parse.exs", __DIR__)
 Code.require_file("utils.exs", __DIR__)
+Code.require_file("THEEBRAIN.exs", __DIR__)
 
 
 defmodule Requests do 
@@ -16,6 +17,7 @@ defmodule Requests do
     def get_play_by_play_by_teams(home, away, date, sport \\ "mlax" , division \\ "1") do
         Requests.get_contest_id_html(home, away, date, sport, division)
         |>Requests.get_play_by_play_by_id()
+        |>Statfitter.Utils.update_time_continuous()
     end
 
     # Getting id for a game 

@@ -64,7 +64,7 @@ defmodule Statfitter do
         nil
     end
 
-    # TODO: Implement parsing branch -----# 
+    # TODO: Implement pruning branch -----# 
      # FALSE DETECTIONS
         # Three ways to possibly detect  false detection
 
@@ -132,6 +132,12 @@ defmodule Statfitter do
 
 
     #--------------------Face Off Difference Array algo--------------------------#
+
+        # TODO Update this so that first face off of each period is not 15:00 
+        # Create offset based off of period number basically 
+        # Mabye it should be called with the full stats rather than just list of faceoffs
+        # Would make sense 
+
         #pbp
         def get_faceoff_difference_array_pbp(faceoffs, last \\ 0)
 
