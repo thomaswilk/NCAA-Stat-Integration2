@@ -19,100 +19,12 @@
 
 
 defmodule Statfitter do 
-
-    def match_pbp_to_cv(cv_stats, pbp_stats, _home, _away) do
-        renamed_cv_stats = cv_stats #Team_Assigner.assign_cv_teams(cv_stats, pbp_stats)
-
-        #sorts ALL stats by quarter
-        Enum.flat_map(["1", "2", "3", "4"], fn period ->
-            cv = Statfitter.Utils.get_stat_by_period(renamed_cv_stats, period)
-            pbp = Statfitter.Utils.get_stat_by_period(pbp_stats, period)
-
-            {cv, pbp}
-           # match_quarter({cv, pbp})
-        end)
-    end     
-
-    
-#   # def match_quarter(stats) do 
-    #     {cv, pbp} = stats    
-
-    #     num_cv_fo = Utils.get_faceoffs(cv_fo)
-    #     |> length()
-
-    #     num_pbp_fo = Utils.get_faceoffs(pbp_fo)
-    #     |> length()
-    #     # get number of face offs for each
-        
-    #     if num_cv_fo == num_pbp_fo do
-    #     # cv_fo == pbp_fo
-    #         # Line up accordingly
-
-
-            
-    #     else if num_cv_fo > num_pbp_fo do 
-      
-    #     else do 
-
-    #     end 
-# end
-
-    # TODO: Implement matching branch 
-    # will be easy
-
-    def fo_equal(_cv_stats, _pbp_stats) do
-        nil
-    end
-
-    # TODO: Implement pruning branch -----# 
-     # FALSE DETECTIONS
-        # Three ways to possibly detect  false detection
-
-        # 1: how long since last face off
-            # using the face off difference and some multiplier to account from game time to real time, if a length is too long then found it ! 
-
-        # 2: how long the clip is 
-            # many false detections are short snippets (10 seconds or less in length) and can be scanned that way
-
-        # 3: From the result of the face off, we can see which team won and then use sliding window to see where it fucks up or something 
-            # say cv = [left, right, right, left, left ]
-            # and pbp= [left, right, right, left ]
-            # then we can see that one of the last two must be incorrect 
-    #-----------------------------------------#
-
-    # Assumptions: . 
-
-    def pbp_lt_cv_matching(cv_stats, pbp_stats) do 
-       Statfitter.Utils.get_faceoffs(cv_stats)
-        |> Enum.map(fn stat -> 
-            stat.team
-        end)
-
-        Statfitter.Utils.get_faceoffs(pbp_stats)
-        |> Enum.map(fn stat -> 
-            stat.team
-        end)
-    end
-
-    # TODO: Implement imputation branch----#
-        # tbh no clue yet 
-            # Use estimated realtime to predict where to impute extra faceoff?
-            # [cv_stats[0] start time, cv_stats[-1] start time] is the time of the quarter?
-            # 
-    #-------------------------------------#
-    def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
-        nil
-    end 
-
-
-
     defmodule Utils do 
 
         def seconds_formatter(seconds) do 
             min = trunc(seconds / 60) 
             sec = rem(trunc(seconds), 60)
             "#{min}:#{String.pad_leading(Integer.to_string(sec), 2, "0")}"
-
         end 
 
         def get_faceoffs(stats) do
@@ -130,8 +42,7 @@ defmodule Statfitter do
             period_stats
         end
 
-
-    #--------------------Face Off Difference Array algo--------------------------#
+      #--------------------Face Off Difference Array algo--------------------------#
 
         # TODO Update this so that first face off of each period is not 15:00 
         # Create offset based off of period number basically 
@@ -169,7 +80,7 @@ defmodule Statfitter do
             # Recursive pattern matchin' bb 
             [Float.round((current_fo_time - last) * 1.0, 2) | get_faceoff_difference_array_cv(rest, current_fo_time)]
         end 
-    #----------------------------------------------------------------------------#
+      #----------------------------------------------------------------------------#
         def get_length_of_stat(stat) do 
             if stat.film_time_end and stat.film_time_start do
                 Float.round((stat.film_time_end - stat.film_time_start) * 1.0, 2)
@@ -191,7 +102,113 @@ defmodule Statfitter do
                 %Stat{stat | time: total_seconds}
             end )
         end
+    end # End of utils 
+
+    def main(cv_stats, pbp_stats, _home, _away) do
+        renamed_cv_stats = Team_Assigner.assign_cv_teams(cv_stats, pbp_stats)
+        #sorts ALL stats by quarter
+
+        Enum.flat_map([1, 2, 3, 4], fn period ->
+            cv = Statfitter.Utils.get_stat_by_period(renamed_cv_stats, period)
+
+
+            pbp = Statfitter.Utils.get_stat_by_period(pbp_stats, period)
+
+           match_quarter({cv, pbp})
+        end)
+    end     
+
+    
+     def match_quarter(stats) do 
+        {cv, pbp} = stats    
+
+        
+        num_cv_fo = Utils.get_faceoffs(cv)
+        |> length()
+
+        
+        num_pbp_fo = Utils.get_faceoffs(pbp)
+        |> length()
+        # get number of face offs for each
+        IO.puts("Num cv:#{num_cv_fo}, Num PBP: #{num_pbp_fo}")
+        cond do
+            num_cv_fo == num_pbp_fo -> 
+                fo_equal(cv, pbp)
+                
+
+            num_cv_fo > num_pbp_fo -> 
+                pbp_gt_cv_matching(cv, pbp)
+
+            true -> 
+                pbp_lt_cv_matching(cv, pbp)
+        end
     end
+
+
+    #Done?
+    def fo_equal(cv_stats, pbp_stats) do
+        IO.puts("This quarter FO equal")
+        cv_fo = Utils.get_faceoffs(cv_stats)
+
+        cv_fo_map = Enum.with_index(cv_fo) |> Enum.into(%{}, fn {stat, idx} -> {idx, stat} end)
+
+
+        Enum.with_index(pbp_stats)
+        |> Enum.map(fn {stat, idx} ->
+            if stat.title == "Faceoff" and Map.has_key?(cv_fo_map, idx) do
+            # update film_time_end from corresponding cv faceoff stat
+            %Stat{stat | film_time_end: cv_fo_map[idx].film_time_end}
+            else
+            stat
+            end
+        end)
+        end
+
+# TODO: Implement pruning branch -----# 
+     # FALSE DETECTIONS
+        # Three ways to possibly detect  false detection
+
+        # 1: how long since last face off
+            # using the face off difference and some multiplier to account from game time to real time, if a length is too long then found it ! 
+
+        # 2: how long the clip is 
+            # many false detections are short snippets (10 seconds or less in length) and can be scanned that way
+
+        # 3: From the result of the face off, we can see which team won and then use sliding window to see where it fucks up or something 
+            # say cv = [left, right, right, left, left ]
+            # and pbp= [left, right, right, left ]
+            # then we can see that one of the last two must be incorrect 
+#-----------------------------------------#
+    def pbp_lt_cv_matching(_cv_stats, _pbp_stats) do 
+    #    Statfitter.Utils.get_faceoffs(cv_stats)
+    #     |> Enum.map(fn stat -> 
+    #         stat.team
+    #     end)
+
+    #     Statfitter.Utils.get_faceoffs(pbp_stats)
+    #     |> Enum.map(fn stat -> 
+    #         stat.team
+    #     end)
+        IO.puts("This quarter PBP stats less than")
+        [%Stat{}]
+
+    end
+
+# TODO: Implement imputation branch----#
+        # tbh no clue yet 
+            # Use estimated realtime to predict where to impute extra faceoff?
+            # [cv_stats[0] start time, cv_stats[-1] start time] is the time of the quarter?
+            # 
+#-------------------------------------#
+    def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
+        IO.puts("This quarter PBP stats greater than")
+        [%Stat{}]
+
+    end 
+
+
+
+ 
 
 end
 
@@ -212,7 +229,8 @@ defmodule Team_Assigner do
             {cv_faceoffs, pbp_faceoffs}
             |> backwards_check()
 
-            replace_team_names({left_team, right_team}, cv_stats)
+            adjusted = replace_team_names({left_team, right_team}, cv_stats)
+            adjusted 
         end
 
         # TODO: Implement a method of matching teams properly 

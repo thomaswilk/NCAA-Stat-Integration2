@@ -41,46 +41,65 @@ defmodule Main do
 
   def test_faceoff_difference(cv_path, pbp_path, period \\ 2 ) do
 
-      IO.puts("pbp")
-      Utils.json_to_stats(pbp_path)
-      |> Statfitter.Utils.get_stat_by_period(period)
-      |> Statfitter.Utils.get_faceoffs
-      #|> Statfitter.Utils.update_time_continuous      # pbp dont have continuous time unless we make it 
-      |> Statfitter.Utils.get_faceoff_difference_array_pbp
-      |> Enum.with_index()
-      |> Enum.each(fn {val, idx} ->
-            IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
-          end)
+    IO.puts("pbp")
+    Utils.json_to_stats(pbp_path)
+    |> Statfitter.Utils.get_stat_by_period(period)
+    |> Statfitter.Utils.get_faceoffs
+    #|> Statfitter.Utils.update_time_continuous      # pbp dont have continuous time unless we make it 
+    |> Statfitter.Utils.get_faceoff_difference_array_pbp
+    |> Enum.with_index()
+    |> Enum.each(fn {val, idx} ->
+          IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+        end)
 
-      IO.puts("\n\n")
-      IO.puts("cv")
-      Utils.json_to_stats(cv_path)
-      |> Statfitter.Utils.get_stat_by_period(period)
-      |> Statfitter.Utils.get_faceoffs
-      |> Statfitter.Utils.get_faceoff_difference_array_cv
-      |> Enum.with_index()
-      |> Enum.each(fn {val, idx} ->
-            IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
-          end)
-
+    IO.puts("\n\n")
+    IO.puts("cv")
+    Utils.json_to_stats(cv_path)
+    |> Statfitter.Utils.get_stat_by_period(period)
+    |> Statfitter.Utils.get_faceoffs
+    |> Statfitter.Utils.get_faceoff_difference_array_cv
+    |> Enum.with_index()
+    |> Enum.each(fn {val, idx} ->
+          IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+        end)
   end
 
+  # add output path
+  def test_equal_faceoff_matching(cv_path, pbp_path, period) do 
+    cv_stats = Utils.json_to_stats(cv_path) |> Statfitter.Utils.get_stat_by_period(period)
+    pbp_stats = Utils.json_to_stats(pbp_path) |> Statfitter.Utils.get_stat_by_period(period)
+    
+    Statfitter.fo_equal(cv_stats, pbp_stats)
+    |> IO.inspect()
+  end 
+
+  def test_match_whole_game(cv_path, pbp_path) do 
+    IO.puts("1")
+     cv_stats = Utils.json_to_stats(cv_path) 
+     pbp_stats = Utils.json_to_stats(pbp_path) 
+    IO.puts("2")
+     Statfitter.main(cv_stats, pbp_stats, "Cornell", "Maryland")
+     |> Utils.print_stats_json("output/firstrun.json")
+  end 
+
+
 end 
-
-
 #------------Example of creating pbp and reading it------------------#
+  # Requests.get_play_by_play_by_teams("Cornell", "Maryland", "05/26/2025")
+  # |> Utils.print_stats_json("output/pbpChip.json")
 
-# Requests.get_play_by_play_by_teams("Cornell", "Maryland", "05/26/2025")
-# |> Utils.print_stats_json("output/pbpChip.json")
-
-# Utils.json_to_stats("output/pbpChip.json")
-# |> IO.inspect()
-
+  # Utils.json_to_stats("output/pbpChip.json")
+  # |> IO.inspect()
 #---------------------------------------------------#
 
 
 # Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
-Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 2)
+# Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 3)
 
 # Main.test_team_assigner("input/cvChip.json", "input/pbpChip.json")
 # Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+
+# Main.test_equal_faceoff_matching("input/cvChip.json", "input/pbpChip.json", 3)
+
+
+Main.test_match_whole_game("input/cvChip.json", "input/pbpChip.json")
