@@ -14,92 +14,74 @@ Code.require_file("THEEBRAIN.exs",__DIR__)
 
 
 
-#------------Testing main request------------------#
+#------------Example of creating pbp and reading it------------------#
 
 # Requests.get_play_by_play_by_teams("Marist", "Siena", "05/01/2025")
 # |> Utils.print_stats_json("input/pbpMaristSiena.json")
 
-# Requests.get_play_by_play_by_teams("Cornell", "Maryland", "05/26/2025")
-# |> Statfitter.Utils.update_time_continuous()
-# |> Utils.print_stats_json("other/time_change.json")
-
 # Utils.json_to_stats("input/cvMaristSiena.json")
 # |> IO.inspect()
 
+#---------------------------------------------------#
 
 
+Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json")
 
-#---------Testing face off difference-------------#
-# period = 3
+# Main.test_team_assigner("input/cvChip.json", "input/pbpChip.json")
+# Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
 
-# IO.puts("pbp")
-# Utils.json_to_stats("input/pbpMaristSiena.json")
-# |> Statfitter.Utils.get_stat_by_period(period)
-# |> Statfitter.Utils.get_faceoffs
-# |> Statfitter.Utils.update_time_continuous
-# |> Statfitter.Utils.get_faceoff_difference_array_pbp
-# |> Enum.with_index()
-# |> Enum.each(fn {val, idx} ->
-#   IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
-#   end)
+defmodule Main do 
 
-# IO.puts("\n\n")
-# IO.puts("cv")
-# Utils.json_to_stats("input/cvMaristSiena.json")
-# |> Statfitter.Utils.get_stat_by_period(period)
-# |> Statfitter.Utils.get_faceoffs
-# |> Statfitter.Utils.get_faceoff_difference_array_cv
-# |> Enum.with_index()
-# |> Enum.each(fn {val, idx} ->
-#   IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
-#   end)
+  def test_team_assigner(cv_path, pbp_path) do 
+    cv = Utils.json_to_stats(cv_path)
+    pbp = Utils.json_to_stats(pbp_path)
+
+    Team_Assigner.assign_cv_teams(cv, pbp)
+    |> Statfitter.Utils.get_faceoffs()
+    |> Statfitter.Utils.get_stat_by_period(2)
+    |> Enum.with_index
+    |> Enum.map(fn {fo, idx} ->
+      IO.puts(" FO ##{idx}: #{fo.team}")
+    end)
 
 
-#-------Testing Team Assigner----------#
-#marist vs sienna
-cv = Utils.json_to_stats("input/cvMaristSiena.json")
-pbp = Utils.json_to_stats("input/pbpMaristSiena.json")
+    IO.puts("\n\n")
 
-Team_Assigner.assign_cv_teams(cv, pbp)
-|> Statfitter.Utils.get_faceoffs()
-|> Statfitter.Utils.get_stat_by_period(2)
-|> Enum.with_index
-|> Enum.map(fn {fo, idx} ->
-  IO.puts(" FO ##{idx}: #{fo.team}")
-end)
+    pbp
+    |> Statfitter.Utils.get_faceoffs
+    |> Statfitter.Utils.get_stat_by_period(2)
+    |> Enum.with_index
+    |> Enum.map(fn {fo, idx} ->
+      IO.puts(" FO ##{idx}: #{fo.team}")
+    end)
 
+  end
 
-IO.puts("\n\n")
+  def test_faceoff_difference(cv_path, pbp_path, period \\ 2 )
 
-pbp
-|> Statfitter.Utils.get_faceoffs
-|> Statfitter.Utils.get_stat_by_period(2)
-|> Enum.with_index
-|> Enum.map(fn {fo, idx} ->
-  IO.puts(" FO ##{idx}: #{fo.team}")
-end)
+      IO.puts("pbp")
+      Utils.json_to_stats(pbp_path)
+      |> Statfitter.Utils.get_stat_by_period(period)
+      |> Statfitter.Utils.get_faceoffs
+      |> Statfitter.Utils.update_time_continuous # pbp dont have continuous time unless we make it 
+      |> Statfitter.Utils.get_faceoff_difference_array_pbp
+      |> Enum.with_index()
+      |> Enum.each(fn {val, idx} ->
+            IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+          end)
 
+      IO.puts("\n\n")
+      IO.puts("cv")
+      Utils.json_to_stats(cv_path)
+      |> Statfitter.Utils.get_stat_by_period(period)
+      |> Statfitter.Utils.get_faceoffs
+      |> Statfitter.Utils.get_faceoff_difference_array_cv
+      |> Enum.with_index()
+      |> Enum.each(fn {val, idx} ->
+            IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+          end)
 
-#CHIP
+  end
 
-# cv = Utils.json_to_stats("input/cvChip.json")
-# pbp = Utils.json_to_stats("input/pbpChip.json")
-
-# Team_Assigner.assign_cv_teams(cv, pbp)
-# |> Statfitter.Utils.get_faceoffs()
-# |> Statfitter.Utils.get_stat_by_period(2)
-# |> Enum.with_index
-# |> Enum.map(fn {fo, idx} ->
-#   IO.puts(" FO ##{idx}: #{fo.team}")
-# end)
-
-
-# IO.puts("\n\n")
-
-# pbp
-# |> Statfitter.Utils.get_faceoffs
-# |> Statfitter.Utils.get_stat_by_period(2)
-# |> Enum.with_index
-# |> Enum.map(fn {fo, idx} ->
-#   IO.puts(" FO ##{idx}: #{fo.team}")
-# end)
+end 
