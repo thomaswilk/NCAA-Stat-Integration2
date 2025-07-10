@@ -89,6 +89,14 @@ defmodule Statfitter do
             end    
         end 
 
+        def update_time_multiplier(stats, multiplier) do 
+            Enum.map(stats, fn stat -> 
+                new_time = stat.time * multiplier
+                %Stat{  stat | time: new_time }
+            end )
+        end 
+
+
         def update_time_continuous(stats) do
             # Turnovers cause issues due to sometimes missing time
             Enum.filter(stats, 
@@ -130,7 +138,7 @@ defmodule Statfitter do
         num_pbp_fo = Utils.get_faceoffs(pbp)
         |> length()
         # get number of face offs for each
-        IO.puts("Num cv:#{num_cv_fo}, Num PBP: #{num_pbp_fo}")
+        # IO.puts("Num cv:#{num_cv_fo}, Num PBP: #{num_pbp_fo}")
         cond do
             num_cv_fo == num_pbp_fo -> 
                 fo_equal(cv, pbp)
@@ -147,23 +155,32 @@ defmodule Statfitter do
 
     #Done?
     def fo_equal(cv_stats, pbp_stats) do
-        IO.puts("This quarter FO equal")
-        cv_fo = Utils.get_faceoffs(cv_stats)
 
+        #Index cv faceoffs so you can transfer film times to pbp stats in order
+        cv_fo = Utils.get_faceoffs(cv_stats)
         cv_fo_map = Enum.with_index(cv_fo) |> Enum.into(%{}, fn {stat, idx} -> {idx, stat} end)
 
-
-        Enum.with_index(pbp_stats)
+        Utils.get_faceoffs(pbp_stats)
+        |> Enum.with_index()
         |> Enum.map(fn {stat, idx} ->
-            if stat.title == "Faceoff" and Map.has_key?(cv_fo_map, idx) do
-            # update film_time_end from corresponding cv faceoff stat
-            %Stat{stat | film_time_end: cv_fo_map[idx].film_time_end, film_time_start: cv_fo_map[idx].film_time_end - 12}
+            if stat.title == "Faceoff" do
+            case Map.fetch(cv_fo_map, idx) do
+                {:ok, cv_fo} ->
+                    %Stat{stat |
+                        film_time_end: cv_fo.film_time_end,
+                        film_time_start: cv_fo.film_time_end - 12
+                    }
 
+                :error -> 
+                    IO.puts("Erorrrrrr")
+                    stat
+            end
             else
             stat
             end
         end)
-        end
+    end
+
 
 # TODO: Implement pruning branch -----# 
      # FALSE DETECTIONS
@@ -197,10 +214,28 @@ defmodule Statfitter do
             |> Enum.take(difference)
             |> Enum.map(fn {stat, _length} -> stat end)
 
-        IO.inspect(shortest_n, label: "Face offs removed:")
+        # IO.inspect(shortest_n, label: "Face offs removed:")
         Enum.filter(cv_stats, fn stat -> stat not in shortest_n end)
         |> fo_equal(pbp_stats)
     end
+
+
+    def prune2(cv_stats, pbp_stats) do 
+            cv_fo_diff = Utils.get_faceoffs(cv_stats)
+            |> Utils.get_faceoff_difference_array_cv
+            |> Enum.sum()
+
+            pbp_fo_diff = Utils.get_faceoffs(pbp_stats)
+            |> Utils.get_faceoff_difference_array_pbp
+            |> Enum.sum()
+            
+            (cv_fo_diff-20)/pbp_fo_diff
+        end 
+
+
+
+
+
 
 # TODO: Implement imputation branch----#
         # tbh no clue yet 
@@ -211,7 +246,6 @@ defmodule Statfitter do
     def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
         IO.puts("Quarter PBP > CV")
         [%Stat{}]
-
     end
 end
 
@@ -245,9 +279,11 @@ defmodule Team_Assigner do
 
             # who left who right?
             case cv_fo.team do
-                "left" -> IO.inspect({pbp_fo.team, get_other_team(pbp_fo.team, pbp_faceoffs)})
+                "left" -> 
+                        #IO.inspect({pbp_fo.team, get_other_team(pbp_fo.team, pbp_faceoffs)})
                         {pbp_fo.team, get_other_team(pbp_fo.team, pbp_faceoffs)}
-                "right" -> IO.inspect({get_other_team(pbp_fo.team, pbp_faceoffs), pbp_fo.team})
+                "right" -> 
+                        #IO.inspect({get_other_team(pbp_fo.team, pbp_faceoffs), pbp_fo.team})
                         {get_other_team(pbp_fo.team, pbp_faceoffs), pbp_fo.team}
                 _ -> {"Unknown", "Unknown"}
             end

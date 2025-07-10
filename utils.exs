@@ -27,22 +27,6 @@ defmodule Utils do
     end
   end
 
-
-  # def json_to_stats(json_string) do
-  #   case Jason.decode(json_string) do
-  #     {:ok, %{"stats" => raw_stats}} ->
-  #       Enum.map(raw_stats, fn stat_map ->
-  #         map = for {k, v} <- stat_map, into: %{}, do: {String.to_atom(k), v}
-  #         struct(Stat, map)
-  #       end)
-
-  #     {:error, reason} ->
-  #       IO.puts("Failed to decode JSON: #{inspect(reason)}")
-  #       []
-  #   end
-  # end
-
-
   def save_cv_json(data, path) do
     cleaned =
       data
@@ -50,8 +34,6 @@ defmodule Utils do
       |> Enum.filter(&is_map/1)
 
     json = Jason.encode!(cleaned, pretty: true)
-
-
     File.write!(path, json)
   end
 
