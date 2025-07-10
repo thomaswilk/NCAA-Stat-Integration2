@@ -14,13 +14,13 @@ Code.require_file("THEEBRAIN.exs",__DIR__)
 
 defmodule Main do 
 
-  def test_team_assigner(cv_path, pbp_path) do 
+  def test_team_assigner(cv_path, pbp_path, period \\ 1) do 
     cv = Utils.json_to_stats(cv_path)
     pbp = Utils.json_to_stats(pbp_path)
 
     Team_Assigner.assign_cv_teams(cv, pbp)
     |> Statfitter.Utils.get_faceoffs()
-    |> Statfitter.Utils.get_stat_by_period(2)
+    |> Statfitter.Utils.get_stat_by_period(period)
     |> Enum.with_index
     |> Enum.map(fn {fo, idx} ->
       IO.puts(" FO ##{idx}: #{fo.team}")
@@ -31,7 +31,7 @@ defmodule Main do
 
     pbp
     |> Statfitter.Utils.get_faceoffs
-    |> Statfitter.Utils.get_stat_by_period(2)
+    |> Statfitter.Utils.get_stat_by_period(period)
     |> Enum.with_index
     |> Enum.map(fn {fo, idx} ->
       IO.puts(" FO ##{idx}: #{fo.team}")
@@ -73,13 +73,13 @@ defmodule Main do
     |> IO.inspect()
   end 
 
-  def test_match_whole_game(cv_path, pbp_path) do 
+  def test_match_whole_game(cv_path, pbp_path, output_path \\ "output/default_dump.json") do 
     IO.puts("1")
      cv_stats = Utils.json_to_stats(cv_path) 
      pbp_stats = Utils.json_to_stats(pbp_path) 
     IO.puts("2")
      Statfitter.main(cv_stats, pbp_stats, "Cornell", "Maryland")
-     |> Utils.print_stats_json("output/firstrun.json")
+     |> Utils.print_stats_json(output_path)
   end 
 
 
@@ -93,13 +93,17 @@ end
 #---------------------------------------------------#
 
 
-# Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+
+
+
 # Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 3)
 
 # Main.test_team_assigner("input/cvChip.json", "input/pbpChip.json")
-# Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
+# Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
 
 # Main.test_equal_faceoff_matching("input/cvChip.json", "input/pbpChip.json", 3)
 
 
-Main.test_match_whole_game("input/cvChip.json", "input/pbpChip.json")
+# Main.test_match_whole_game("input/cvChip.json", "input/pbpChip.json")
+# Main.test_match_whole_game("input/cvMaristSiena.json", "input/pbpMaristSiena.json")

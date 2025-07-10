@@ -1,66 +1,35 @@
 
 
+FACE OFF MATCHING 
+1. Browse games and find a quarter where cv < pbp (cv misses a face off)
+    then figure out an algorithm to properly do that 
 
-Parse -
-    !!!For play by play , it should return period too 
+2. Figure out mapping of the team names. 
+    (Maybe just a mapping util ran at the end)
 
-Requests -
-    Some sort of endpoint to check if both play by play and cv breakdown available 
+3. Decide which method to prune faceoffs
 
-
-Stat - 
-M    !Do we even need this? Why not just have it be a map? 
-
-
-Utils - 
-    Json readers / writers 
-    
+4. Figure out how faceoffs with no teams should be handled
+    (Some cases they are an indicator of a false detection while others they truly just dont have a name)
 
 
 
-THEEEBRAINNNNNN - 
-    Fitter - 
+STAT MATCHING
 
+one side of this project which I havent given much thought to yet is deciding how to line up the rest of 
+the stats up. Once we get all the faceoffs lined up, that will be good, but whats next?
 
-        Utils - 
-            get stats by period 
-            get faceoffs 
+1. Looking at transition
+    From past scripts, we infered from the stat "Clear Attempt" which team has possession.
+    Using this we can line up clear attempt stats with the fillm_time_end and then all stats go in between 
 
-    Assign Teams - 
+    So for that case it would be 
 
+    [Face off win, (...intermediate stats...), Clear attempt (should be successful but i guess we could parse fails too) ]
+    And all of these stats could have the same fillm_time_end and fillm_time_start for now. This kinda reflects jordan's 
+    idea of just have each possession labeled with the given stats, but if we get that far, i have a feeling we can do 
+    some transformation of game clock difference between each stat to real time and get it more precise. But thats later on 
 
-
-
-First faceoff
-
-SIENA VS MARIST 
-
-1: Left, SIE
-2: Left, SIE
-3: Left, MAR
-4: Right, Mar
-
-
-CHIP
-
-1: Right, UMD
-2: Right, UMD
-3: Left, COR
-4: Left, COR 
-
-------------------
-
-Last faceoff
-
-marist vs sienn
-cv: Left
-pbp: SIE
-
-Good 
-
-
-chip
-cv: Right
-pbp: COR
-
-Not good 
+2. Looking at possessions
+    I guess this kinda goes hand and hand with the last one but still nice to have both. I will have to browse to see which 
+    one is more accurately predicted/ more reliable from the cv breakdowns

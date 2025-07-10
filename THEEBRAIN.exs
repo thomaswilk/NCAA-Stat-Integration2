@@ -136,7 +136,7 @@ defmodule Statfitter do
                 fo_equal(cv, pbp)
                 
 
-            num_cv_fo > num_pbp_fo -> 
+            num_cv_fo < num_pbp_fo -> 
                 pbp_gt_cv_matching(cv, pbp)
 
             true -> 
@@ -189,7 +189,7 @@ defmodule Statfitter do
     #     |> Enum.map(fn stat -> 
     #         stat.team
     #     end)
-        IO.puts("This quarter PBP stats less than")
+        IO.puts("Quarter PBP < CV ")
         [%Stat{}]
 
     end
@@ -201,7 +201,7 @@ defmodule Statfitter do
             # 
 #-------------------------------------#
     def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
-        IO.puts("This quarter PBP stats greater than")
+        IO.puts("Quarter PBP > CV")
         [%Stat{}]
 
     end 
