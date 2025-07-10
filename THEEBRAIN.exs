@@ -82,8 +82,8 @@ defmodule Statfitter do
         end 
       #----------------------------------------------------------------------------#
         def get_length_of_stat(stat) do 
-            if stat.film_time_end and stat.film_time_start do
-                Float.round((stat.film_time_end - stat.film_time_start) * 1.0, 2)
+            if is_number(stat.film_time_end) and is_number(stat.film_time_start) do
+                trunc(stat.film_time_end - stat.film_time_start)
             else 
                 nil
             end    
@@ -140,7 +140,7 @@ defmodule Statfitter do
                 pbp_gt_cv_matching(cv, pbp)
 
             true -> 
-                pbp_lt_cv_matching(cv, pbp)
+                pbp_lt_cv_matching(cv, pbp, num_pbp_fo - num_cv_fo)
         end
     end
 
@@ -157,7 +157,8 @@ defmodule Statfitter do
         |> Enum.map(fn {stat, idx} ->
             if stat.title == "Faceoff" and Map.has_key?(cv_fo_map, idx) do
             # update film_time_end from corresponding cv faceoff stat
-            %Stat{stat | film_time_end: cv_fo_map[idx].film_time_end}
+            %Stat{stat | film_time_end: cv_fo_map[idx].film_time_end, film_time_start: cv_fo_map[idx].film_time_end - 12}
+
             else
             stat
             end
@@ -171,27 +172,34 @@ defmodule Statfitter do
         # 1: how long since last face off
             # using the face off difference and some multiplier to account from game time to real time, if a length is too long then found it ! 
 
+
+        # THIS IS THE CURRENT IMPLEMENTATION
+        # Occam's razor: simplest solution usually best (or something like that)
         # 2: how long the clip is 
             # many false detections are short snippets (10 seconds or less in length) and can be scanned that way
+            # gets the n shortest clips and removes them 
+
 
         # 3: From the result of the face off, we can see which team won and then use sliding window to see where it fucks up or something 
             # say cv = [left, right, right, left, left ]
             # and pbp= [left, right, right, left ]
             # then we can see that one of the last two must be incorrect 
 #-----------------------------------------#
-    def pbp_lt_cv_matching(_cv_stats, _pbp_stats) do 
-    #    Statfitter.Utils.get_faceoffs(cv_stats)
-    #     |> Enum.map(fn stat -> 
-    #         stat.team
-    #     end)
+    def pbp_lt_cv_matching(cv_stats, pbp_stats, difference) do 
+        cv_fo = Utils.get_faceoffs(cv_stats)
 
-    #     Statfitter.Utils.get_faceoffs(pbp_stats)
-    #     |> Enum.map(fn stat -> 
-    #         stat.team
-    #     end)
-        IO.puts("Quarter PBP < CV ")
-        [%Stat{}]
+        shortest_n = 
+            Enum.map(cv_fo,  fn fo -> 
+                length = Utils.get_length_of_stat(fo)
+                {fo, length} 
+            end)
+            |> Enum.sort(fn {_fo1, length1}, {_fo2, length2} -> length1 >= length2 end)
+            |> Enum.take(difference)
+            |> Enum.map(fn {stat, _length} -> stat end)
 
+        IO.inspect(shortest_n, label: "Face offs removed:")
+        Enum.filter(cv_stats, fn stat -> stat not in shortest_n end)
+        |> fo_equal(pbp_stats)
     end
 
 # TODO: Implement imputation branch----#
@@ -204,12 +212,7 @@ defmodule Statfitter do
         IO.puts("Quarter PBP > CV")
         [%Stat{}]
 
-    end 
-
-
-
- 
-
+    end
 end
 
 

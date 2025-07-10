@@ -39,29 +39,45 @@ defmodule Main do
 
   end
 
-  def test_faceoff_difference(cv_path, pbp_path, period \\ 2 ) do
+  def test_faceoff_difference(cv_path, pbp_path, period \\ 1) do
 
     IO.puts("pbp")
-    Utils.json_to_stats(pbp_path)
+    x = Utils.json_to_stats(pbp_path)
     |> Statfitter.Utils.get_stat_by_period(period)
     |> Statfitter.Utils.get_faceoffs
-    #|> Statfitter.Utils.update_time_continuous      # pbp dont have continuous time unless we make it 
     |> Statfitter.Utils.get_faceoff_difference_array_pbp
+
+    
+    x
     |> Enum.with_index()
     |> Enum.each(fn {val, idx} ->
-          IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+          # IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+            IO.puts("#{idx}: #{val}")
+
         end)
+
+
+    Enum.sum(x)
+    |> Statfitter.Utils.seconds_formatter()
+    |> IO.inspect(label: "total time PBP")
 
     IO.puts("\n\n")
     IO.puts("cv")
-    Utils.json_to_stats(cv_path)
-    |> Statfitter.Utils.get_stat_by_period(period)
+     y = Utils.json_to_stats(cv_path)
     |> Statfitter.Utils.get_faceoffs
+    |> Statfitter.Utils.get_stat_by_period(period)
     |> Statfitter.Utils.get_faceoff_difference_array_cv
+    
+    y
     |> Enum.with_index()
     |> Enum.each(fn {val, idx} ->
-          IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+          # IO.puts("#{idx}: #{Statfitter.Utils.seconds_formatter(val)}")
+          IO.puts("#{idx}: #{val}")
         end)
+
+      Enum.sum(y)
+      |> Statfitter.Utils.seconds_formatter()
+      |> IO.inspect(label: "Total Time CV") 
   end
 
   # add output path
@@ -74,13 +90,22 @@ defmodule Main do
   end 
 
   def test_match_whole_game(cv_path, pbp_path, output_path \\ "output/default_dump.json") do 
-    IO.puts("1")
      cv_stats = Utils.json_to_stats(cv_path) 
      pbp_stats = Utils.json_to_stats(pbp_path) 
-    IO.puts("2")
+
      Statfitter.main(cv_stats, pbp_stats, "Cornell", "Maryland")
-     |> Utils.print_stats_json(output_path)
+
+    #  |> Utils.print_stats_json(output_path)
   end 
+
+  def test_match_quarter(cv_path, pbp_path, period) do 
+    cv_stats = Utils.json_to_stats(cv_path) |> Statfitter.Utils.get_stat_by_period(period)
+    pbp_stats = Utils.json_to_stats(pbp_path) |> Statfitter.Utils.get_stat_by_period(period)
+
+    Statfitter.match_quarter({cv_stats, pbp_stats})
+
+
+  end
 
 
 end 
@@ -96,14 +121,30 @@ end
 
 
 
-# Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 3)
 
 # Main.test_team_assigner("input/cvChip.json", "input/pbpChip.json")
-Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
-# Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
+# Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
+
+# Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 1)
+# Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 2)
 
 # Main.test_equal_faceoff_matching("input/cvChip.json", "input/pbpChip.json", 3)
+# Main.test_match_quarter("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 4)
 
 
 # Main.test_match_whole_game("input/cvChip.json", "input/pbpChip.json")
 # Main.test_match_whole_game("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+
+
+# Seeing if match quarter mabye worked?
+period = 1
+Main.test_match_whole_game("input/cvMaristSiena.json", "input/pbpMaristSiena.json", period)
+|> Statfitter.Utils.get_faceoffs
+|> Enum.map( fn stat -> {stat.team, stat.film_time_end} end )
+|> IO.inspect(label: "Merged")
+
+Utils.json_to_stats("input/cvMaristSiena.json")
+|> Statfitter.Utils.get_faceoffs
+|> Enum.map( fn stat -> {stat.team, stat.film_time_end} end )
+|> IO.inspect(label: "CV")
+
