@@ -1,0 +1,37 @@
+Explaination of faceoff fitter when there are false detections:
+
+
+Given two lists of face offs. CV and PBP.
+
+PBP are given game clock only (Q1 15:00, Q2 3:42, Q3 7:05, etc.) This clock counts down, so 10:00 
+    is 5:00 after 15:00 rather than ahead, like in real time. 
+
+CV are given film_time start and end, so therefore given real world time. This will come into effect later.
+
+
+Example data (PBP are converted to "continous" time, like a clock in soccer, (or futbol :)  ) 
+
+Time of PBP face offs 
+
+[0, 3, 8, 12, ... ]
+
+Time of CV face offs
+
+[2, 8, 17, 25, 26, ...]
+
+
+Step 1: Compute time since last face off (Statfitter.Utils.get_faceoff_difference)
+
+pbp
+[ 0, 3, 5, 4, ... ]
+
+cv
+[ 2, 7, 8, , ... ]
+
+
+Step 2: Use some sort of scaling/estimation to conver pbp to real time 
+
+
+
+# To be finished later # 
+

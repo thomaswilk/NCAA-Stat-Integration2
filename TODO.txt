@@ -1,8 +1,6 @@
 
 PARSER
-
 mabye add timeouts if we are going to try and estimate real time.
-
 add something for this "30-second clock violation by MAR." found it on NCAA Play by play, not seen before 
 
 

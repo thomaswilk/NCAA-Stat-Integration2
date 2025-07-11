@@ -124,7 +124,7 @@ end
   # Main.test_team_assigner("input/cvChip.json", "input/pbpChip.json")
   # Main.test_team_assigner("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
 
-  # Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 1)
+  # Main.test_faceoff_difference("input/cvMaristSiena.json", "input/pbpMaristSiena.json", 3)
   # Main.test_faceoff_difference("input/cvChip.json", "input/pbpChip.json", 2)
 
   # Main.test_equal_faceoff_matching("input/cvChip.json", "input/pbpChip.json", 3)
@@ -144,14 +144,16 @@ end
 #---------------------------------------------------------------------#
 
 #----------------Tests for new pruning branch-------------------------#
-  Code.require_file("stat.exs", __DIR__)
+  # # Code.require_file("stat.exs", __DIR__)
 
-  # game = "chip"
+  # # game = "chip"
   game = "MaristSiena"
 
-  pbp_stats = Utils.json_to_stats("input/pbp#{game}.json")
-  cv_stats = Utils.json_to_stats("input/cv#{game}.json")
-  multiplier = Statfitter.prune2(cv_stats, pbp_stats)
+  pbp_stats = Utils.json_to_stats("input/pbpChip.json")
+  cv_stats = Utils.json_to_stats("input/cvChip2.json")
+  cv_faceoffs = Statfitter.Utils.get_faceoffs(cv_stats)
+  multiplier = 2
+  # multiplier = Statfitter.prune2(cv_stats, pbp_stats)
 
 
 
@@ -167,18 +169,40 @@ end
   |> Enum.each(fn {val, idx} -> 
      IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
    end)
-
    IO.puts("\n\n CV")
 
-  Statfitter.Utils.get_faceoffs(cv_stats)
-  |> Statfitter.Utils.get_faceoff_difference_array_cv
+  # Statfitter.Utils.get_faceoffs(cv_stats)
+  # |> Statfitter.Utils.get_faceoff_difference_array_cv
+  
+
+  first_stat = hd(cv_faceoffs).film_time_end
+
+  Statfitter.Utils.get_faceoff_difference_array_cv(cv_faceoffs, first_stat )  
   |> Enum.with_index()
   |> Enum.each(fn {val, idx} -> 
      IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
    end)
 
-
-
-
-
 #---------------------------------------------------------------------#
+
+# Utils.json_to_stats("output/firstSuccessChip.json")
+# |> Statfitter.Utils.get_faceoffs
+# |> Enum.map(fn stat -> 
+#   stat.film_time_end
+#   end
+# )
+# |> Enum.with_index()
+# |> Enum.each(fn {val, idx} -> 
+#   IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
+# end)
+
+# Main.test_match_whole_game("input/cvMaristSiena.json", "input/pbpMaristSiena.json")
+# |> Statfitter.Utils.get_faceoffs
+# |> Enum.map(fn stat -> 
+#   stat.film_time_end
+#   end
+# )
+# |> Enum.with_index()
+# |> Enum.each(fn {val, idx} -> 
+#   IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
+# end)

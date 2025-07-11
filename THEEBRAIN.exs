@@ -30,13 +30,13 @@ defmodule Statfitter do
         def get_faceoffs(stats) do
             faceoffs = Enum.filter(stats, fn stat -> stat.title == "Faceoff" end)
             faceoffs
-        end 
+            end 
 
-        def get_faceoffs(stats1, stats2) do
+            def get_faceoffs(stats1, stats2) do
             {get_faceoffs(stats1), get_faceoffs(stats2)}
         end 
 
-        # type checking 
+
         def get_stat_by_period(stats, period) do
             period_stats = Enum.filter(stats, fn stat -> stat.period == period end)
             period_stats
@@ -224,16 +224,44 @@ defmodule Statfitter do
             cv_fo_diff = Utils.get_faceoffs(cv_stats)
             |> Utils.get_faceoff_difference_array_cv
             |> Enum.sum()
+                    |> IO.inspect(label: "CV")
 
             pbp_fo_diff = Utils.get_faceoffs(pbp_stats)
             |> Utils.get_faceoff_difference_array_pbp
             |> Enum.sum()
-            
+                            |> IO.inspect(label: "pbp")
+
+
             (cv_fo_diff-20)/pbp_fo_diff
         end 
 
+    # Will break in overtime
+    # def prune3(cv_stats, pbp_stats) do
+    #     cv_faceoffs = Utils.get_faceoffs(cv_stats)
+
+    #     cv_fo_difference = Enum.flat_map([1,2,3,4], fn period -> 
+    #         period_fo = Statfitter.Utils.get_stat_by_period(cv_faceoffs, period)
+
+    #         first_stat =
+    #           if period == 1 do
+    #             hd(period_fo).film_time_end
+    #           else
+    #             List.last(Utils.get_stat_by_period(cv_faceoffs, period - 1)).film_time_end
+    #           end
+
+    #         Statfitter.Utils.get_faceoff_difference_array_cv(period_fo, first_stat )  
+
+    #     end)
+    #     |> Enum.sum()
+
+    #     Statfitter.Utils.get_faceoff_difference_array_cv(p)  
+
+        
 
 
+    #     (cv_fo_difference-100)/3600
+
+    # end
 
 
 
@@ -250,7 +278,10 @@ defmodule Statfitter do
 end
 
 
-#Move this module inside of statfitter?
+
+
+######This module will probably be deleted#####
+# Redundant if we properly match faceoffs
 defmodule Team_Assigner do 
         # This module determines which team is "left" and which team is "right" in cv stats
         # Main function is assign_cv_teams

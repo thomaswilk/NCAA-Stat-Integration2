@@ -1,0 +1,2 @@
+THEEBRAIN.exs -> Statfitter -> Utils -> difference algo
+    Is there a wat to combine those two rather than having seperate calls? 
