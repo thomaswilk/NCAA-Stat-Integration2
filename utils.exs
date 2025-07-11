@@ -2,6 +2,12 @@ Code.require_file("stat.exs", __DIR__)
 
 defmodule Utils do
 
+
+    # Reads json file of stats (produced by our algo/ from cv breakdown)
+    # and returns list of stats
+    # 
+    # Note: This name was fine, but i think its getting to be clutter
+    #       Might change "json_to_stats" to "read_json"
   def json_to_stats(path) do
     case File.read(path) do
       {:ok, json_string} ->
@@ -13,6 +19,7 @@ defmodule Utils do
     end
   end
 
+  # JSON Decoder, called by function above
   def parse_json_to_stats(json_string) do
     case Jason.decode(json_string) do
       {:ok, %{"stats" => raw_stats}} ->
@@ -27,28 +34,28 @@ defmodule Utils do
     end
   end
 
-  def save_cv_json(data, path) do
-    cleaned =
-      data
-      |> Enum.reject(&is_nil/1)
-      |> Enum.filter(&is_map/1)
 
-    json = Jason.encode!(cleaned, pretty: true)
+
+
+
+  # Given stats, prints to path
+  #
+  # Similar to above, might change "print_stats_json" to "save_json"
+  def print_stats_json(final, path) do
+    stats =
+      final
+      |> Enum.reject(&is_nil/1)
+      |> Enum.map(&Map.from_struct/1)
+
+    json = Jason.encode!(%{"stats" => stats}, pretty: true)
     File.write!(path, json)
   end
 
-  def print_stats_json(final, path) do
-  stats =
-    final
-    |> Enum.reject(&is_nil/1)
-    |> Enum.map(&Map.from_struct/1)
+  
 
-  json = Jason.encode!(%{"stats" => stats}, pretty: true)
-  File.write!(path, json)
-end
-
-
-
+  # Creates url to find contest ID 
+  # Will have to update each year with new "Season IDs"
+  # Hopefully we remember 
   def create_scoreboard_url(date, sport \\ "mlax", division \\ "1") do
     [month_str, day_str, year_str] = String.split(date, "/")
 
@@ -84,6 +91,4 @@ end
   end
 
   
-
-
 end

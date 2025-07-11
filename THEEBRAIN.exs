@@ -21,12 +21,27 @@
 defmodule Statfitter do 
     defmodule Utils do 
 
+        # Given integer of seconds 
+            # returns MM:SS
+            # 
+            # may be worthwhile to add "HH:" as well
+            # I think this has only been used for development ease
         def seconds_formatter(seconds) do 
             min = trunc(seconds / 60) 
             sec = rem(trunc(seconds), 60)
             "#{min}:#{String.pad_leading(Integer.to_string(sec), 2, "0")}"
         end 
 
+        # Given list of stats with title field
+            
+            # fiters stats by title
+            # return stats where stat.title == "Faceoff"
+
+            # Note: Parsing is done excplictly to create stats with the title Faceoff
+            #       and input cv also matches this convention.
+            #       With that being said, might be better to convert 
+            #       this to filter by tag_type, rather than title
+            #       
         def get_faceoffs(stats) do
             faceoffs = Enum.filter(stats, fn stat -> stat.title == "Faceoff" end)
             faceoffs
@@ -37,6 +52,10 @@ defmodule Statfitter do
         end 
 
 
+        # Given list of stats with period field
+
+            # filters stats by given period
+            # returns list of stats where stat.period == arg.period
         def get_stat_by_period(stats, period) do
             period_stats = Enum.filter(stats, fn stat -> stat.period == period end)
             period_stats
@@ -81,6 +100,11 @@ defmodule Statfitter do
             [Float.round((current_fo_time - last) * 1.0, 2) | get_faceoff_difference_array_cv(rest, current_fo_time)]
         end 
       #----------------------------------------------------------------------------#
+
+        # Given one stat with valid film_time_start and film_time_end
+
+            # returns film_time_start - film_time_end
+            # Returns integer value
         def get_length_of_stat(stat) do 
             if is_number(stat.film_time_end) and is_number(stat.film_time_start) do
                 trunc(stat.film_time_end - stat.film_time_start)
@@ -89,6 +113,11 @@ defmodule Statfitter do
             end    
         end 
 
+
+        # Given list of stats which have a valid time (integer value representing seconds) 
+
+            # multiplies each stat by "multiplier"
+            # returns list of stats with updated field 
         def update_time_multiplier(stats, multiplier) do 
             Enum.map(stats, fn stat -> 
                 new_time = stat.time * multiplier
@@ -97,6 +126,14 @@ defmodule Statfitter do
         end 
 
 
+        # Given list of stats which have a valid time ("mm:ss") and period field
+
+            # Converts game clock to contninous clock (seconds) (like in soccer)
+            # Period 1 15:00 -> 0 
+            # Period 2 10:00 -> 1200
+            # Period 2 5:00 -> 1500
+
+            # Returns stats with updated time field
         def update_time_continuous(stats) do
             # Turnovers cause issues due to sometimes missing time
             Enum.filter(stats, 
@@ -110,9 +147,9 @@ defmodule Statfitter do
                 %Stat{stat | time: total_seconds}
             end )
         end
-    end # End of utils 
+    end # End Statfitter.utils module
 
-    def main(cv_stats, pbp_stats, _home, _away) do
+    def main(cv_stats, pbp_stats, _home \\ nil, _away \\ nil) do
         renamed_cv_stats = Team_Assigner.assign_cv_teams(cv_stats, pbp_stats)
         #sorts ALL stats by quarter
 
@@ -127,7 +164,7 @@ defmodule Statfitter do
     end     
 
     
-     def match_quarter(stats) do 
+    def match_quarter(stats) do 
         {cv, pbp} = stats    
 
         
@@ -202,6 +239,16 @@ defmodule Statfitter do
             # and pbp= [left, right, right, left ]
             # then we can see that one of the last two must be incorrect 
 #-----------------------------------------#
+
+    # Given full list of cv_stats, full list of pbp_stats, and difference in face off values
+
+        # retrieves face offs from each list
+        # sorts by clip length (Duration)
+        # deletes "difference" amount of shortest faceoffs
+        
+        # Note: this is a first attempt at identifying false detections
+        #       and another implementation is coming
+
     def pbp_lt_cv_matching(cv_stats, pbp_stats, difference) do 
         cv_fo = Utils.get_faceoffs(cv_stats)
 
@@ -220,6 +267,10 @@ defmodule Statfitter do
     end
 
 
+
+    # Prune 2 and 3 are functions which return "Linear scaler" 
+    # aka multiplier for real time stats to film time stats
+
     def prune2(cv_stats, pbp_stats) do 
             cv_fo_diff = Utils.get_faceoffs(cv_stats)
             |> Utils.get_faceoff_difference_array_cv
@@ -235,33 +286,23 @@ defmodule Statfitter do
             (cv_fo_diff-20)/pbp_fo_diff
         end 
 
-    # Will break in overtime
-    # def prune3(cv_stats, pbp_stats) do
-    #     cv_faceoffs = Utils.get_faceoffs(cv_stats)
+    # Will break in overtime due to period search
+    def prune3(cv_stats, _pbp_stats) do
+        cv_faceoffs = Utils.get_faceoffs(cv_stats)
+        cv_fo_difference = Enum.flat_map([1,2,3,4], fn period -> 
+            period_fo = Statfitter.Utils.get_stat_by_period(cv_faceoffs, period)
+            first_stat =
+              if period == 1 do
+                hd(period_fo).film_time_end
+              else
+                List.last(Utils.get_stat_by_period(cv_faceoffs, period - 1)).film_time_end
+              end
+            Statfitter.Utils.get_faceoff_difference_array_cv(period_fo, first_stat )  
+        end)
+        |> Enum.sum()
 
-    #     cv_fo_difference = Enum.flat_map([1,2,3,4], fn period -> 
-    #         period_fo = Statfitter.Utils.get_stat_by_period(cv_faceoffs, period)
-
-    #         first_stat =
-    #           if period == 1 do
-    #             hd(period_fo).film_time_end
-    #           else
-    #             List.last(Utils.get_stat_by_period(cv_faceoffs, period - 1)).film_time_end
-    #           end
-
-    #         Statfitter.Utils.get_faceoff_difference_array_cv(period_fo, first_stat )  
-
-    #     end)
-    #     |> Enum.sum()
-
-    #     Statfitter.Utils.get_faceoff_difference_array_cv(p)  
-
-        
-
-
-    #     (cv_fo_difference-100)/3600
-
-    # end
+        (cv_fo_difference-100)/3600
+    end
 
 
 
@@ -270,6 +311,9 @@ defmodule Statfitter do
             # Use estimated realtime to predict where to impute extra faceoff?
             # [cv_stats[0] start time, cv_stats[-1] start time] is the time of the quarter?
             # 
+
+            # Note: searching through scorebreak games, I honestly havent found an instance where 
+            #       this case happens. I dont want to forget about it, but it is an edge case for sure 
 #-------------------------------------#
     def pbp_gt_cv_matching(_cv_stats, _pbp_stats) do 
         IO.puts("Quarter PBP > CV")
@@ -280,7 +324,7 @@ end
 
 
 
-######This module will probably be deleted#####
+######This module will probably be deleted########
 # Redundant if we properly match faceoffs
 defmodule Team_Assigner do 
         # This module determines which team is "left" and which team is "right" in cv stats
