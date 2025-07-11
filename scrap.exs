@@ -119,6 +119,20 @@ defmodule Main do
     Statfitter.match_quarter({cv_stats, pbp_stats})
   end
 
+
+
+  def test_loss(cv_fo_diff, pbp_fo_diff) do
+    Enum.zip(cv_fo_diff, pbp_fo_diff)
+    |> Enum.map(fn {cv, pbp} -> trunc(abs(cv - pbp)) end)
+    |> Enum.sum()
+  end
+
+  #removes index from list
+  def test_delete(stats, index) do
+    {first, second} = Enum.split(stats, index)
+    second_half = tl(second)
+    first ++ second_half
+  end
 end 
 
 #------------Example of creating pbp stats and reading it-------------------#
@@ -134,12 +148,12 @@ end
     # Do not remove/comment
     
     # Maryland vs Cornell 05/26/2025 (Championship game aka 'the chip')
-    cv_path = "input/cvChip.json"
-    pbp_path = "input/pbpChip.json"
+    # cv_path = "input/cvChip.json"
+    # pbp_path = "input/pbpChip.json"
 
     # Marist vs Siena 05/01/2025 
-    # cv_path = "input/cvMaristSiena.json"
-    # pbp_path = "input/pbpMaristSiena.json"
+    cv_path = "input/cvMaristSiena.json"
+    pbp_path = "input/pbpMaristSiena.json"
 
 
     cv_stats = Utils.json_to_stats(cv_path)
@@ -151,16 +165,16 @@ end
 #------------ Testing functions from MAIN -----------------------#
   # # Period of game to test on
 
-  period = 3 
-  # Main.test_team_assigner(cv_stats, pbp_stats, period)
+  # period = 3 
+  # # Main.test_team_assigner(cv_stats, pbp_stats, period)
 
-  Main.test_faceoff_difference(cv_stats, pbp_stats, period)
+  # Main.test_faceoff_difference(cv_stats, pbp_stats, period)
 
 
-  Main.test_equal_faceoff_matching(cv_stats, pbp_stats, period)
+  # Main.test_equal_faceoff_matching(cv_stats, pbp_stats, period)
 
-  Main.test_match_quarter(cv_stats, pbp_stats, period)
-  |> Statfitter.Utils.get_faceoffs()
+  # Main.test_match_quarter(cv_stats, pbp_stats, period)
+  # |> Statfitter.Utils.get_faceoffs()
 #---------------------------------------------------------------------#
 
 
@@ -175,61 +189,57 @@ end
 #---------------------------------------------------------------------#
 
 #-------Tests for new pruning branch---(PBP faceoff < CV faceoff)-----#
-  # # Code.require_file("stat.exs", __DIR__)
 
-
-  cv_faceoffs = Statfitter.Utils.get_faceoffs(cv_stats)
-  multiplier = 2
-  # multiplier = Statfitter.prune2(cv_stats, pbp_stats)
+  # marist vs siena false face offs: 14, 18,  32 
 
 
 
-  IO.inspect(multiplier, label: "Linear scaleer")
+  # MARTIN
+  # This might be the algorithm we choose to go with.
+  # It iterates through each cv faceoff, deleting one at a time
+  # Each time it removes a face off, It calculates "loss"
+  # Searching for the difference in time pbp faceoffs and cv faceoffs 
+  # After every index is tested, it will sum the loss 
+  # Then we take the removal which generated lowest loss 
 
-  # adjusted_pbp_faceoffs
-   IO.puts("PBP")
+  # multiplier = 1
+  # multiplier = 2
+  # multiplier = 3
+  # multiplier = 4
+  # multiplier = 5
+  multiplier = 0.8
+  cv_fo = cv_stats |> Statfitter.Utils.get_faceoffs
+  first_cv_fo_time = hd(cv_fo).film_time_end
+  
+  cv_diff = cv_fo |> Statfitter.Utils.get_faceoff_difference_array_cv(first_cv_fo_time)
+  pbp_diff = pbp_stats |> Statfitter.Utils.get_faceoffs |> Statfitter.Utils.update_time_multiplier(multiplier) |> Statfitter.Utils.get_faceoff_difference_array_pbp
 
-  Statfitter.Utils.get_faceoffs(pbp_stats)
-  |> Statfitter.Utils.update_time_multiplier(multiplier)
-  |> Statfitter.Utils.get_faceoff_difference_array_pbp
-  |> Enum.with_index()
-  |> Enum.each(fn {val, idx} -> 
-     IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
-   end)
-   IO.puts("\n\n CV")
+
   
 
-  first_stat = hd(cv_faceoffs).film_time_end
+  loss= cv_diff
+  |> Enum.with_index
+  |> Enum.map(fn {_, index} ->
+    cv_diff 
+    |> Main.test_delete(index)
+    |> Main.test_loss(pbp_diff)
+    end
+  )
 
-  Statfitter.Utils.get_faceoff_difference_array_cv(cv_faceoffs, first_stat )  
-  |> Enum.with_index()
-  |> Enum.each(fn {val, idx} -> 
-     IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
-   end)
+  # loss
+  # |> Enum.with_index
+  # |> Enum.map(fn {loss, index} ->
+  #   IO.puts("Removed FO #{index+1}: #{loss}")
+  # end )
+
+  min = Enum.min(loss)
+  index = Enum.find_index(loss, fn x -> x == min end)
+
+
+  IO.puts("------\nMultiplier: #{multiplier}\nFace off to remove: #{index+1}\nLoss: #{min}\n------- ")
+
 
 # ---------------------------------------------------------------------#
 
 
-# -----------other testing stuff done with meeting with martin---------#
-  # -------- not important ---- # 
-# Utils.json_to_stats("output/firstSuccessChip.json")
-# |> Statfitter.Utils.get_faceoffs
-# |> Enum.map(fn stat -> 
-#   stat.film_time_end
-#   end
-# )
-# |> Enum.with_index()
-# |> Enum.each(fn {val, idx} -> 
-#   IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
-# end)
-
-# Main.test_match_whole_game(cv_stats, pbp_stats)
-# |> Statfitter.Utils.get_faceoffs
-# |> Enum.map(fn stat -> 
-#   stat.film_time_end
-#   end
-# )
-# |> Enum.with_index()
-# |> Enum.each(fn {val, idx} -> 
-#   IO.puts("#{idx}, #{Statfitter.Utils.seconds_formatter(val)}")
-# end)
+ 
